@@ -44,5 +44,8 @@
   },
   "devDependencies": {
     "react-router-dom": "^6.2.1"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off"
   }
 }

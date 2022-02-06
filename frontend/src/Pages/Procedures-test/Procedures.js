@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import useState from "@mui/material/useState";
+import { useState, useEffect } from "react";
 
 import DropTargets from "../../Components/DropTargets";
 import DropSymptoms from "../../Components/DropSymptoms";
@@ -8,8 +8,6 @@ import DropDesiases from "../../Components/DropDesiases";
 import Slider from "../../Components/Slider";
 
 import Typography from "@mui/material/Typography";
-
-import axios from "axios";
 
 const classes = {
   root: {
