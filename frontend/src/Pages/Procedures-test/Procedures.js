@@ -9,6 +9,8 @@ import Slider from "../../Components/Slider";
 
 import Typography from "@mui/material/Typography";
 
+import axios from "axios";
+
 const classes = {
   root: {
     marginTop: "5rem",
