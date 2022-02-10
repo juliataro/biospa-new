@@ -39,6 +39,12 @@ class Disease {
     let sql = `DELETE FROM diseases WHERE id = ${id};`;
     return db.execute(sql);
   }
+
+  // DropDown fetching functions
+  static findByTitleEt() {
+    let sql = `SELECT dis_title_et FROM diseases;`;
+    return db.execute(sql);
+  }
 }
 
 module.exports = Disease;

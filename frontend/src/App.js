@@ -2,9 +2,10 @@ import React from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Navbar from "./Components/Navbar";
-import { Procedures } from "./Pages/Procedures-test/Procedures";
-import { About } from "./Pages/Procedures-test/About";
+import Navbar from "./Components/Header/Navbar";
+
+import { Procedures } from "./Pages/Procedures";
+import { About } from "./Pages/About";
 
 // Global Colors
 
