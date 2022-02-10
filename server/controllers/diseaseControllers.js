@@ -8,9 +8,10 @@ exports.getDiseasesEt = async (req, res, next) => {
   try {
     //let symptom = await Symptom.findById(2);
 
-    let [diseases, _] = await Disease.findByTitleEt();
+    let diseases = await Disease.findByTitleEt();
 
     res.status(200).json({ success: true, data: diseases });
+    res.send(diseases);
   } catch (error) {
     console.log(error);
     next(error);

@@ -54,9 +54,9 @@ function DropDiseases() {
     <Autocomplete
       multiple
       id="checkboxes-tags-demo"
-      options={diseases}
+      options={[{ diseases }]}
       disableCloseOnSelect
-      getOptionLabel={(option) => `${option.dis_title_et}`}
+      getOptionLabel={(option) => `${diseases.dis_title_et}`}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           <Checkbox
@@ -65,7 +65,7 @@ function DropDiseases() {
             style={{ marginRight: 8 }}
             checked={selected}
           />
-          {option.dis_title_et}
+          {[option.dis_title_et]}
         </li>
       )}
       style={{ width: 500 }}
