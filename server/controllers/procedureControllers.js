@@ -16,7 +16,18 @@ exports.getProceduresTargets = async (req, res, next) => {
 };
 
 //
-//
+// Get All Procedures on  Diseases
+
+exports.getProceduresDiseases = async (req, res, next) => {
+  try {
+    let procedures = await Procedure.findAllProceduresOnDiseases();
+
+    res.status(200).json(procedures);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
 //
 //
 
@@ -62,7 +73,6 @@ exports.getAllProcedures = async (req, res, next) => {
     let procedures = await Procedure.findAll();
 
     res.status(200).json({ procedures });
-    res.send(rows);
   } catch (error) {
     console.log(error);
     next(error);

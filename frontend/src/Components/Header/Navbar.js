@@ -1,70 +1,36 @@
 import React from "react";
+//import  { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
   CssBaseline,
-  makeStyles,
   useTheme,
   useMediaQuery,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import DrawerComponent from "./Drawer";
-import logo from "../Images/Loodus-BioSpa-Logo-300.png"; //
-import "../index.css";
-
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-
-const useStyles = makeStyles((theme) => ({
-  navbar: {
-    backgroundColor: "#fff",
-    height: 80,
-  },
-
-  logo: {
-    cursor: "pointer",
-    marginTop: 15,
-    marginLeft: 60,
-    marginRight: 40,
-  },
-
-  logolinks: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100vw",
-  },
-
-  navlinks: {
-    marginTop: 30,
-    display: "flex",
-    justifyContent: "space-between",
-  },
-
-  link: {
-    textDecoration: "none",
-    color: "#585c69",
-    fontSize: "16px",
-    marginLeft: theme.spacing(3),
-
-    "&:hover": {
-      color: "#72bb94",
-      borderBottom: "1px solid white",
-    },
-
-    loginout: {
-      color: "#72bb94 !important",
-    },
-
-    button: {
-      backgroundColor: "#72bb94 !important",
-    },
-  },
-}));
+import DrawerComponent from "./Drawer";
+import logo from "../../Images/Loodus-BioSpa-Logo-300.png"; //
+import "../../index.css";
+import useStyles from "./styles";
+// import axios from "axios";
 
 function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  // const [Choices, setChoices] = useState("dis_title_et");
+
+  // const loadChoices = async () => {
+  //   const response = await axios.get("http://localhost:4000/diseases/");
+  //   setChoices
+  // };
+
+  // useEffect(() => {
+  //   loadData();
+  // }, [Choices]);
 
   return (
     <AppBar className={classes.navbar} position="static">
@@ -90,6 +56,28 @@ function Navbar() {
               <Link to="/about" className={classes.link}>
                 Meist
               </Link>
+              <div className={classes.languages}>
+                {/* <Link
+                  onClick={() => setLangChoices("dis_title_et")}
+                  to="/estonian"
+                  className={classes.link}
+                >
+                  ET
+                </Link>
+                <Link
+                  onClick={() => setLangChoices("dis_title_et")}
+                  className={classes.link}
+                >
+                  RU
+                </Link>
+                <Link
+                  onClick={() => setLangChoices("dis_title_et")}
+                  className={classes.link}
+                >
+                  EN
+                </Link> */}
+              </div>
+
               <Stack direction="row" spacing={2}>
                 <Button variant="outlined">Loogi Sisse</Button>
 

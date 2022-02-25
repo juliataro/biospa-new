@@ -1,5 +1,22 @@
 const Disease = require("../models/diseaseModel");
 
+/**
+ * DROP-DOWN MENU fetch
+ */
+
+exports.getDiseasesEt = async (req, res, next) => {
+  try {
+    //let symptom = await Symptom.findById(2);
+
+    let diseases = (await Disease.findByTitleEt())[0];
+
+    res.status(200).json(diseases);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 /** ------------------------------------------------------------------
  * ADMINS-PANEL controller Methods for Deseases routses
  */
@@ -24,8 +41,7 @@ exports.getAllDiseases = async (req, res, next) => {
   try {
     let diseases = await Disease.findAll();
 
-    res.status(200).json({ diseases });
-    res.send(rows);
+    res.status(200).json({ success: true, data: diseases });
   } catch (error) {
     console.log(error);
     next(error);
@@ -39,8 +55,7 @@ exports.getDiseaseById = async (req, res, next) => {
 
     let [disease, _] = await Disease.findById(req.params.id);
 
-    res.status(200).json({ disease });
-    res.send(rows);
+    res.status(200).json({ success: true, data: disease });
   } catch (error) {
     console.log(error);
     next(error);

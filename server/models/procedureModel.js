@@ -28,11 +28,19 @@ class Procedure {
 
   static findAllProceduresOnTargets() {
     let sql =
-      "Select * FROM procedures INNER JOIN procedures-targets INNER JOIN targets ON procedures.id=procedures-tartgets.procedures_id AND procedures-targets.targets_id=targets.id;";
+      "Select FROM procedures INNER JOIN procedures_targets INNER JOIN targets ON procedures.id=procedures_tartgets.procedures_id AND procedures_targets.targets_id=targets.id;";
     return db.execute(sql);
   }
 
   //
+
+  static findAllProceduresOnDiseases() {
+    let sql = `Select proc_title_et, proc_descr_et, proc_duration, proc_price FROM procedures 
+    INNER JOIN procedures_diseases ON procedures.id=procedures_diseases.procedures_id 
+    INNER JOIN diseases ON procedures_diseases.diseases_id=diseases.id;`;
+    return db.execute(sql);
+  }
+
   //
   //
   //

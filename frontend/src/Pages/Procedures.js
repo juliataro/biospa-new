@@ -1,15 +1,17 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import useState from "@mui/material/useState";
+// import { useState, useEffect } from "react";
 
-import DropTargets from "../../Components/DropTargets";
-import DropSymptoms from "../../Components/DropSymptoms";
-import DropDesiases from "../../Components/DropDesiases";
-import Slider from "../../Components/Slider";
+import DropTargets from "../Components/Procedures/DropTargets";
+import DropSymptoms from "../Components/Procedures/DropSymptoms";
+import DropDesiases from "../Components/Procedures/DropDiseases";
+import Slider from "../Components/Procedures/Slider";
 
 import Typography from "@mui/material/Typography";
 
-import axios from "axios";
+import ProceduresList from "../Components/Procedures/ProceduresList";
+
+// import axios from "axios";
 
 const classes = {
   root: {
@@ -59,6 +61,11 @@ export const Procedures = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Slider />
+        </Grid>
+      </Grid>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid item xs={12}>
+          <ProceduresList />
         </Grid>
       </Grid>
     </div>

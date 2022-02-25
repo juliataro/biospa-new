@@ -5,7 +5,10 @@ const router = express.Router();
 
 // @ routes GET /procedures/ For Users -----------------------
 
-router.route("/procedures-targets").get(pControllers.getProceduresTargets);
+//   http://localhost:4000/procedures/procedures-diseases
+
+router.route("/procedures_targets").get(pControllers.getProceduresTargets);
+router.route("/procedures_diseases").get(pControllers.getProceduresDiseases);
 //   .get(pControllers.getProceduresSymptoms)
 //   .get(pControllers.getProceduresDiseases)
 //   .get(pControllers.getProceduresTargetsSymptoms)

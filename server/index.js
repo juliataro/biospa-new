@@ -6,13 +6,31 @@ const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 
-// import Axios from "axios";
-
 var corsOptions = {
-  origin: "http://localhost:4000",
+  origin: "http://localhost:3000",
 };
 // Allowing to make calls from frontend to backend api
 app.use(cors(corsOptions));
+
+// app.use((req, rew, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "Origin",
+//     "X-Requested-With",
+//     "Content-Type",
+//     "Accept",
+//     "Authorization"
+//   );
+//   if (req.method === "OPTIONS") {
+//     req.header("Access-Control-Allow-Origin", "PUT, POST, PATCH, DELETE, GET");
+//     return res.status(200).json({});
+//   }
+//   next();
+// });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Middleware parse json bodies in the request object
 app.use(express.json());
@@ -22,6 +40,12 @@ app.use("/procedures", require("./routes/procedureRoutes"));
 app.use("/symptoms", require("./routes/symptomRoutes"));
 app.use("/targets", require("./routes/targetRoutes"));
 app.use("/diseases", require("./routes/diseaseRoutes"));
+
+app.use((req, rew, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  next(error);
+});
 
 app.use((err, req, res, next) => {
   console.log(err.stack);

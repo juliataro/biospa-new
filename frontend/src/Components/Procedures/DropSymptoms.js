@@ -7,7 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 
-import "../index.css";
+import "../../index.css";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -49,14 +49,14 @@ export default function MultipleSelectCheckmarks() {
   return (
     <div>
       <FormControl sx={{ m: 1 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Eesmärgid</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">Kaebused</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput label="Targets" />}
+          input={<OutlinedInput label="Symptoms" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
