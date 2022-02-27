@@ -226,9 +226,16 @@ export default function EnhancedTable() {
   const [procedures, setProcedures] = useState([]);
 
   const loadProcedures = async () => {
-    const result = await axios.get("http://localhost:4000/procedures");
-    setProcedures(result.data);
+    const response = await axios.get(
+      "http://localhost:4000/procedures/procedures_diseases"
+    );
+    setProcedures(response.data[0]);
   };
+
+  //   useEffect(() => {
+  //     loadProcedures();
+  //   }, []);
+  //   console.log(procedures);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -308,7 +315,7 @@ export default function EnhancedTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              //     rowCount={procedures.length}
+              rowCount={procedures.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:

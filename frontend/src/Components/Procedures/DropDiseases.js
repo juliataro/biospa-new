@@ -43,15 +43,15 @@ function DropDiseases() {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  // TODO Extract data from DB depending on selected value in Dropdown
-  const [procedures, setProcedures] = useState([]);
+  // // TODO Extract data from DB depending on selected value in Dropdown
+  // const [procedures, setProcedures] = useState([]);
 
-  const loadProcedures = async () => {
-    const result = await axios.get(
-      "http://localhost:4000/procedures/procedures_diseases"
-    );
-    setProcedures(result.data);
-  };
+  // const loadProcedures = async () => {
+  //   const result = await axios.get(
+  //     "http://localhost:4000/procedures/procedures_diseases"
+  //   );
+  //   setProcedures(result.data);
+  // };
 
   return (
     <Grid container spacing={5}>
@@ -86,7 +86,7 @@ function DropDiseases() {
       {/* Fetching Procedures data from DataBase */}
 
       <Grid style={classes.extractData} item xs={6}>
-        <Button spacing={5} onClick={loadProcedures} variant="contained">
+        {/* <Button spacing={5} onClick={loadProcedures} variant="contained">
           Search
         </Button>
 
@@ -99,7 +99,7 @@ function DropDiseases() {
               <Typography variant="body1">body1 </Typography>
             </Grid>
           );
-        })}
+        })} */}
       </Grid>
     </Grid>
   );
