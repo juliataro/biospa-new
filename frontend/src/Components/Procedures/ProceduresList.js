@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -24,20 +24,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
 // For fetching data
-
-import Button from "@mui/material/Button";
-
-const classes = {
-  extractData: {
-    marginTop: "0px",
-  },
-  icon: {
-    color: "white",
-  },
-  searchBtn: {
-    marginTop: "0px",
-  },
-};
+import GenericBtn from "./GenericBtn";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -225,13 +212,6 @@ export default function EnhancedTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [procedures, setProcedures] = useState([]);
 
-  const loadProcedures = async () => {
-    const response = await axios.get(
-      "http://localhost:4000/procedures/procedures_diseases"
-    );
-    setProcedures(response.data[0]);
-  };
-
   //   useEffect(() => {
   //     loadProcedures();
   //   }, []);
@@ -293,14 +273,10 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Button
-        style={classes.searchBtn}
-        spacing={5}
-        onClick={loadProcedures}
-        variant="contained"
-      >
-        Otsi
-      </Button>
+      {/*  Button fetches procedures data */}
+      <GenericBtn setProcedures={setProcedures} />
+
+      {/*  Table consistens */}
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -317,7 +293,7 @@ export default function EnhancedTable() {
               onRequestSort={handleRequestSort}
               rowCount={procedures.length}
             />
-            <TableBody>
+            <TableBody procedures={procedures}>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
               {stableSort(procedures, getComparator(order, orderBy))

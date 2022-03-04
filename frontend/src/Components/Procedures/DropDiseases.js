@@ -10,17 +10,6 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 // For fetching data
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Typography from "@material-ui/core/Typography";
-
-const classes = {
-  extractData: {
-    marginTop: "100px",
-  },
-  icon: {
-    color: "white",
-  },
-};
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -41,17 +30,17 @@ function DropDiseases() {
   }, []);
   console.log(diseases);
 
-  //////////////////////////////////////////////////////////////////////////////
-
-  // // TODO Extract data from DB depending on selected value in Dropdown
-  // const [procedures, setProcedures] = useState([]);
-
-  // const loadProcedures = async () => {
-  //   const result = await axios.get(
-  //     "http://localhost:4000/procedures/procedures_diseases"
+  // const handleChange = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setDiseases(
+  //     // On autofill we get a the stringified value.
+  //     typeof value === "string" ? value.split(",") : value
   //   );
-  //   setProcedures(result.data);
   // };
+
+  //////////////////////////////////////////////////////////////////////////////
 
   return (
     <Grid container spacing={5}>
@@ -64,6 +53,7 @@ function DropDiseases() {
           options={diseases}
           disableCloseOnSelect
           getOptionLabel={(option) => `${option.dis_title_et}`}
+          // onChange={handleChange}
           renderOption={(props, option, { selected }) => (
             <li {...props}>
               <Checkbox
@@ -84,23 +74,6 @@ function DropDiseases() {
 
       {/* -------------------------------------------------------------------------------------------------- */}
       {/* Fetching Procedures data from DataBase */}
-
-      <Grid style={classes.extractData} item xs={6}>
-        {/* <Button spacing={5} onClick={loadProcedures} variant="contained">
-          Search
-        </Button>
-
-        {procedures.map((val, key) => {
-          return (
-            <Grid item xs={6}>
-              <Typography variant="h6">
-                Procedure{procedures.proc_title_et}
-              </Typography>
-              <Typography variant="body1">body1 </Typography>
-            </Grid>
-          );
-        })} */}
-      </Grid>
     </Grid>
   );
 }

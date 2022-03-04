@@ -7,8 +7,7 @@ exports.getProceduresTargets = async (req, res, next) => {
   try {
     let procedures = await Procedure.findAllProceduresOnTargets();
 
-    res.status(200).json({ procedures });
-    res.send(rows);
+    res.status(200).json(procedures);
   } catch (error) {
     console.log(error);
     next(error);
