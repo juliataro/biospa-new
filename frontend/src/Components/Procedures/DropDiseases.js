@@ -19,6 +19,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 //  TODO Extract list of diseases from db into dropdown list
 function DropDiseases() {
   const [diseases, setDiseases] = useState([]);
+  const [diseasesValue, setDiseasesValue] = useState([]);
 
   const loadData = async () => {
     const response = await axios.get("http://localhost:4000/diseases/all/et");
@@ -30,15 +31,10 @@ function DropDiseases() {
   }, []);
   console.log(diseases);
 
-  // const handleChange = (event) => {
-  //   const {
-  //     target: { value },
-  //   } = event;
-  //   setDiseases(
-  //     // On autofill we get a the stringified value.
-  //     typeof value === "string" ? value.split(",") : value
-  //   );
-  // };
+  function handleSelectChange(event) {
+    console.log(event.target.value);
+    setDiseasesValue(event.target.value);
+  }
 
   //////////////////////////////////////////////////////////////////////////////
 
@@ -48,8 +44,10 @@ function DropDiseases() {
         {/* -------------------------------------------------------------------------------------------------- */}
         {/* Dropdown element */}
         <Autocomplete
+          value={diseasesValue.id}
+          onChange={handleSelectChange}
           multiple
-          id="checkboxes-tags-demo"
+          id="diseasesId"
           options={diseases}
           disableCloseOnSelect
           getOptionLabel={(option) => `${option.dis_title_et}`}

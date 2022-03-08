@@ -38,7 +38,7 @@ class Procedure {
   static findAllProceduresOnDiseases() {
     let sql = `Select proc_title_et, proc_descr_et, proc_duration, proc_price FROM procedures 
     INNER JOIN procedures_diseases ON procedures.id=procedures_diseases.procedures_id 
-    INNER JOIN diseases ON procedures_diseases.diseases_id=diseases.id;`;
+    INNER JOIN diseases ON procedures_diseases.diseases_id!=diseases.id;`;
     return db.execute(sql);
   }
 

@@ -19,14 +19,18 @@ exports.getProceduresTargets = async (req, res, next) => {
 
 exports.getProceduresDiseases = async (req, res, next) => {
   try {
-    let procedures = await Procedure.findAllProceduresOnDiseases();
+    let identity = req.query.id;
+    let procedures = await Procedure.findAllProceduresOnDiseases({
+      identity: identity,
+    }).exec;
 
-    res.status(200).json(procedures);
+    res.status(200).json({ procedures: procedures });
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
+
 //
 //
 

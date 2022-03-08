@@ -35,6 +35,18 @@ const GenericBtn = ({ setProcedures }) => {
   //   setProcedures(response.data[0]);
   // };
 
+  // const loadProceduresTargets = async () => {
+  //   let resource= ""
+  //   switch (EventType) {
+  //     case DISEASE:
+  //       resource = "disease"
+  //   }
+  //   const response = await axios.get(
+  //     "http://localhost:4000/"+resource+"/procedures_targets"
+  //   );
+  //   setProcedures(response.data[0]);
+  // };
+
   return (
     <Button
       style={classes.searchBtn}
