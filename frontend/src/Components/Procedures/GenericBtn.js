@@ -18,7 +18,7 @@ const GenericBtn = ({ setProcedures }) => {
   // Router if only diseases had been chosen
   const loadProceduresDiseases = async () => {
     const response = await axios.get(
-      "http://localhost:4000/procedures/procedures_diseases"
+      "http://localhost:4000/procedures/procedures_diseases?id=${id}"
     );
     setProcedures(response.data[0]);
   };
