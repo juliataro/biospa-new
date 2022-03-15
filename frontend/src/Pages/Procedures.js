@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 // import { useState, useEffect } from "react";
 
 import DropTargets from "../Components/Procedures/DropTargets";
 import DropSymptoms from "../Components/Procedures/DropSymptoms";
-import DropDesiases from "../Components/Procedures/DropDiseases";
+
 import Slider from "../Components/Procedures/Slider";
 
 import Typography from "@mui/material/Typography";
 
 import ProceduresList from "../Components/Procedures/ProceduresList";
+import DropDiseases from "../Components/Procedures/DropDiseases";
 
 // import axios from "axios";
 
@@ -31,6 +32,17 @@ const classes = {
 /**Drop Down elements in two colomns and two rows */
 
 export const Procedures = () => {
+  const [diseases, setDiseases] = useState([]);
+  const [diseasesValue, setDiseasesValue] = useState([]); // Responsible for catching chousen ID in dropdown
+
+  // One variable for all useStates for passing
+  const obj = {
+    diseases,
+    setDiseases,
+    diseasesValue,
+    setDiseasesValue,
+  };
+
   return (
     <div style={classes.root}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -57,7 +69,9 @@ export const Procedures = () => {
         {/*This item will be 12 units on extra small screens */}
         {/*But will be 6 units on small screens */}
         <Grid item xs={12} sm={6}>
-          <DropDesiases />
+          <DropDiseases
+            {...obj} ///////////////////////////// All states and setStates are in one variable
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Slider />
@@ -65,7 +79,7 @@ export const Procedures = () => {
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>
-          <ProceduresList />
+          <ProceduresList {...obj} />
         </Grid>
       </Grid>
     </div>

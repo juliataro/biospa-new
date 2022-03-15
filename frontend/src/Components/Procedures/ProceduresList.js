@@ -203,7 +203,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("price");
   const [selected, setSelected] = React.useState([]);
@@ -211,18 +211,21 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [procedures, setProcedures] = useState([]);
+  const { diseasesValue, setDiseasesValue } = props;
 
   //   useEffect(() => {
   //     loadProcedures();
   //   }, []);
   //   console.log(procedures);
 
+  // Tabele header arrows for sorting
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
+  // All checkboxes handle function
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = procedures.map((n) => n.proc_title_et);
@@ -232,6 +235,7 @@ export default function EnhancedTable() {
     setSelected([]);
   };
 
+  // Every Fetching Result Row Checkbox
   const handleClick = (event, proc_title_et) => {
     const selectedIndex = selected.indexOf(proc_title_et);
     let newSelected = [];
@@ -252,29 +256,38 @@ export default function EnhancedTable() {
     setSelected(newSelected);
   };
 
+  // Changing pages
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  // Handling rows per page
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
+  // Density between rows
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
 
+  // Counting of how much is selected
   const isSelected = (proc_title_et) => selected.indexOf(proc_title_et) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - procedures.length) : 0;
 
+  const dropDiseasValues = {
+    diseasesValue,
+    setDiseasesValue,
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
-      <GenericBtn setProcedures={setProcedures} />
+      <GenericBtn {...dropDiseasValues} setProcedures={setProcedures} />
 
       {/*  Table consistens */}
       <Paper sx={{ width: "100%", mb: 2 }}>

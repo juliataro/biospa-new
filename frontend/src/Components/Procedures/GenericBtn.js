@@ -14,26 +14,16 @@ const classes = {
   },
 };
 
-const GenericBtn = ({ setProcedures }) => {
+const GenericBtn = (props) => {
+  const { setProcedures, diseasesValue } = props;
+
   // Router if only diseases had been chosen
   const loadProceduresDiseases = async () => {
     const response = await axios.get(
-      "http://localhost:4000/procedures/procedures_diseases?id=${id}"
+      `http://localhost:4000/procedures/procedures_diseases?id=${diseasesValue.id}`
     );
     setProcedures(response.data[0]);
   };
-
-  // const loadProceduresTargets = async () => {
-  //   let resource= ""
-  //   switch (EventType) {
-  //     case DISEASE:
-  //       resource = "disease"
-  //   }
-  //   const response = await axios.get(
-  //     "http://localhost:4000/"+resource+"/procedures_targets"
-  //   );
-  //   setProcedures(response.data[0]);
-  // };
 
   // const loadProceduresTargets = async () => {
   //   let resource= ""

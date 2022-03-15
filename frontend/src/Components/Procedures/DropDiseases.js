@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 
 import TextField from "@mui/material/TextField";
@@ -17,23 +17,22 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 //////////////////////////////////////////////////////////////////////////////
 
 //  TODO Extract list of diseases from db into dropdown list
-function DropDiseases() {
-  const [diseases, setDiseases] = useState([]);
-  const [diseasesValue, setDiseasesValue] = useState([]);
-
-  const loadData = async () => {
-    const response = await axios.get("http://localhost:4000/diseases/all/et");
-    setDiseases(response.data);
-  };
+function DropDiseases(props) {
+  const { diseases, setDiseases, diseasesValue, setDiseasesValue } = props;
 
   useEffect(() => {
+    const loadData = async () => {
+      const response = await axios.get("http://localhost:4000/diseases/all/et");
+      setDiseases(response.data);
+    };
     loadData();
-  }, []);
+  }, [setDiseases]);
   console.log(diseases);
 
   function handleSelectChange(event) {
-    console.log(event.target.value);
-    setDiseasesValue(event.target.value);
+    const newArray = diseasesValue;
+    newArray.push(event.target.value);
+    setDiseasesValue(newArray);
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -52,13 +51,13 @@ function DropDiseases() {
           disableCloseOnSelect
           getOptionLabel={(option) => `${option.dis_title_et}`}
           // onChange={handleChange}
-          renderOption={(props, option, { selected }) => (
+          renderOption={(props, option, { diseases }) => (
             <li {...props}>
               <Checkbox
                 icon={icon}
                 checkedIcon={checkedIcon}
                 style={{ marginRight: 8 }}
-                checked={selected}
+                checked={diseases}
               />
               {[option.dis_title_et]}
             </li>
