@@ -35,10 +35,13 @@ class Procedure {
 
   //
 
-  static findAllProceduresOnDiseases() {
-    let sql = `Select proc_title_et, proc_descr_et, proc_duration, proc_price FROM procedures 
+  static findAllProceduresOnDiseases(id) {
+    let sql = `Select procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
     INNER JOIN procedures_diseases ON procedures.id=procedures_diseases.procedures_id 
-    INNER JOIN diseases ON procedures_diseases.diseases_id!=diseases.id;`;
+    INNER JOIN diseases ON procedures_diseases.diseases_id!=diseases.id WHERE diseases.id=ANY(${sql.array(
+      id,
+      "int4"
+    )});`;
     return db.execute(sql);
   }
 

@@ -17,14 +17,25 @@ exports.getProceduresTargets = async (req, res, next) => {
 //
 // Get All Procedures on  Diseases
 
+// exports.getProceduresDiseases = async (req, res, next) => {
+//   try {
+//     let chosenDisIdsArray = req.query.id; // id is the query parameter for dynamic query on button click
+//     let procedures = await Procedure.findAllProceduresOnDiseases({
+//       identity: chosenDisIdsArray,
+//     }).exec;
+
+//     res.status(200).json({ procedures: procedures });
+//   } catch (error) {
+//     console.log(error);
+//     next(error);
+//   }
+// };
+
 exports.getProceduresDiseases = async (req, res, next) => {
   try {
-    let identity = req.query.id;
-    let procedures = await Procedure.findAllProceduresOnDiseases({
-      identity: identity,
-    }).exec;
+    let procedures = await Procedure.findAllProceduresOnDiseases(req.params.id);
 
-    res.status(200).json({ procedures: procedures });
+    res.status(200).json(procedures);
   } catch (error) {
     console.log(error);
     next(error);
@@ -75,7 +86,7 @@ exports.getAllProcedures = async (req, res, next) => {
   try {
     let procedures = await Procedure.findAll();
 
-    res.status(200).json({ procedures });
+    res.status(200).json(procedures);
   } catch (error) {
     console.log(error);
     next(error);

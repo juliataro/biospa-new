@@ -15,15 +15,26 @@ const classes = {
 };
 
 const GenericBtn = (props) => {
-  const { setProcedures, diseasesValue } = props;
+  const { diseasesValue, setProcedures } = props;
 
-  // Router if only diseases had been chosen
+  // const search = useLocation().search;
+  // const diseaseId = new URLSearchParams(search).get();
+
+  // useEffect(() => {
+  //   loadProceduresDiseases();
+  // }, [setDiseasesValue]);
+
   const loadProceduresDiseases = async () => {
+    const idsQuery = diseasesValue
+      .map((n, index) => `id[${index}]=${n}`)
+      .join("&");
     const response = await axios.get(
-      `http://localhost:4000/procedures/procedures_diseases?id=${diseasesValue.id}`
+      `http://localhost:4000/procedures/procedures_diseases?${idsQuery}`
     );
     setProcedures(response.data[0]);
   };
+
+  // Router if only diseases had been chosen
 
   // const loadProceduresTargets = async () => {
   //   let resource= ""
@@ -42,7 +53,7 @@ const GenericBtn = (props) => {
       style={classes.searchBtn}
       spacing={5}
       onClick={() => {
-        loadProceduresDiseases();
+        loadProceduresDiseases(diseasesValue.id);
         // loadProceduresTargets();
       }}
       variant="contained"

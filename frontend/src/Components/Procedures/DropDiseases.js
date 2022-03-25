@@ -27,13 +27,27 @@ function DropDiseases(props) {
     };
     loadData();
   }, [setDiseases]);
-  console.log(diseases);
 
-  function handleSelectChange(event) {
+  function handleSelectChange(event, newValue) {
+    if (newValue != null) {
+      setDiseasesValue(newValue);
+    }
     const newArray = diseasesValue;
     newArray.push(event.target.value);
+    console.log(newValue);
+    console.log(event.target.value);
+
     setDiseasesValue(newArray);
   }
+
+  // function handleSelectChange(event, id) {
+  //   let newArray = diseasesValue.selected;
+  //   newArray = newArray.push(diseasesValue.id);
+  //   console.log(id);
+  //   console.log(diseasesValue.selected);
+
+  //   setDiseasesValue({ selected: newArray });
+  // }
 
   //////////////////////////////////////////////////////////////////////////////
 
@@ -43,21 +57,25 @@ function DropDiseases(props) {
         {/* -------------------------------------------------------------------------------------------------- */}
         {/* Dropdown element */}
         <Autocomplete
-          value={diseasesValue.id}
           onChange={handleSelectChange}
-          multiple
-          id="diseasesId"
+          multiple={true}
+          id="valueId"
           options={diseases}
           disableCloseOnSelect
           getOptionLabel={(option) => `${option.dis_title_et}`}
           // onChange={handleChange}
-          renderOption={(props, option, { diseases }) => (
-            <li {...props}>
+          renderOption={(props, option, { selected }) => (
+            <li
+              {...props}
+              id={diseasesValue.id}
+              value={diseasesValue.id}
+              key={diseasesValue.id}
+            >
               <Checkbox
                 icon={icon}
                 checkedIcon={checkedIcon}
                 style={{ marginRight: 8 }}
-                checked={diseases}
+                checked={selected}
               />
               {[option.dis_title_et]}
             </li>
@@ -67,6 +85,7 @@ function DropDiseases(props) {
             <TextField {...params} label="Haigused" placeholder="Favorites" />
           )}
         />
+        <div>{diseasesValue.id}</div>
       </Grid>
 
       {/* -------------------------------------------------------------------------------------------------- */}

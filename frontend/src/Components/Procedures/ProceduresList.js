@@ -287,7 +287,11 @@ export default function EnhancedTable(props) {
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
-      <GenericBtn {...dropDiseasValues} setProcedures={setProcedures} />
+      <GenericBtn
+        id={diseasesValue.id}
+        {...dropDiseasValues}
+        setProcedures={setProcedures}
+      />
 
       {/*  Table consistens */}
       <Paper sx={{ width: "100%", mb: 2 }}>
