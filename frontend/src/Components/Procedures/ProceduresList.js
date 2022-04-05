@@ -96,6 +96,7 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
+  // Table Header -------------------------------------------------------
   return (
     <TableHead>
       <TableRow>
@@ -202,6 +203,8 @@ const EnhancedTableToolbar = (props) => {
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
+
+// Table part by itsesf --------------------------------------------------------------------
 
 export default function EnhancedTable(props) {
   const [order, setOrder] = React.useState("asc");

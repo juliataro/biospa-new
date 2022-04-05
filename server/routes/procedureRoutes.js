@@ -7,15 +7,21 @@ const router = express.Router();
 
 //   http://localhost:4000/procedures/procedures-diseases
 
-router.route("/procedures_targets").get(pControllers.getProceduresTargets);
-
 // Here Added On in name to show Only Procedures that Depends On Definite procedures
 router.route("/procedures_diseases").get(pControllers.getProceduresDiseases);
-//   .get(pControllers.getProceduresSymptoms)
-//   .get(pControllers.getProceduresDiseases)
+
+// !!!!
+// router.route("/procedures_targets").get(pControllers.getProceduresTargets);
+// .get(pControllers.getProceduresSymptoms)
+// .get(pControllers.getProceduresPrices)
+
 //   .get(pControllers.getProceduresTargetsSymptoms)
 //   .get(pControllers.getProceduresTargetsDiseases)
+//   .get(pControllers.getProceduresTargetsPrice)
+
+//   .get(pControllers.getProceduresSymptomsPrice)
 //   .get(pControllers.getProceduresSymptomsDiseases)
+
 //   .get(pControllers.getProceduresTargetsSymptomsDiseases);
 
 /** ------------------------------------------------------------------

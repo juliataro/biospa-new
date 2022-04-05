@@ -14,27 +14,20 @@ exports.getProceduresTargets = async (req, res, next) => {
   }
 };
 
-//
-// Get All Procedures on  Diseases
-
-// exports.getProceduresDiseases = async (req, res, next) => {
-//   try {
-//     let chosenDisIdsArray = req.query.id; // id is the query parameter for dynamic query on button click
-//     let procedures = await Procedure.findAllProceduresOnDiseases({
-//       identity: chosenDisIdsArray,
-//     }).exec;
-
-//     res.status(200).json({ procedures: procedures });
-//   } catch (error) {
-//     console.log(error);
-//     next(error);
-//   }
-// };
+/**
+ *  Method that fetches Procedures dependendent on Diseaes values and ids.
+ **/
 
 exports.getProceduresDiseases = async (req, res, next) => {
   try {
-    let procedures = await Procedure.findAllProceduresOnDiseases(req.params.id);
+    //Access the provided 'id' as query parameter that is passing to button
+    let ids = req.query.id;
+    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let procedures = (
+      await Procedure.findAllProceduresOnDiseases(idsAsString)
+    )[0]; // Passing ids variable to method
 
+    // Returning the procedures to the rendering engine
     res.status(200).json(procedures);
   } catch (error) {
     console.log(error);

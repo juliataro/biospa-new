@@ -20,6 +20,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 function DropDiseases(props) {
   const { diseases, setDiseases, diseasesValue, setDiseasesValue } = props;
 
+  // Fetch Diseases in dropdown on Page load
   useEffect(() => {
     const loadData = async () => {
       const response = await axios.get("http://localhost:4000/diseases/all/et");
@@ -28,16 +29,9 @@ function DropDiseases(props) {
     loadData();
   }, [setDiseases]);
 
-  function handleSelectChange(event, newValue) {
-    if (newValue != null) {
-      setDiseasesValue(newValue);
-    }
-    const newArray = diseasesValue;
-    newArray.push(event.target.value);
-    console.log(newValue);
-    console.log(event.target.value);
-
-    setDiseasesValue(newArray);
+  function handleSelectChange(event, newValues) {
+    setDiseasesValue(newValues.map((disease) => disease.dis_id));
+    console.log(diseasesValue);
   }
 
   // function handleSelectChange(event, id) {
@@ -64,28 +58,26 @@ function DropDiseases(props) {
           disableCloseOnSelect
           getOptionLabel={(option) => `${option.dis_title_et}`}
           // onChange={handleChange}
-          renderOption={(props, option, { selected }) => (
-            <li
-              {...props}
-              id={diseasesValue.id}
-              value={diseasesValue.id}
-              key={diseasesValue.id}
-            >
+          renderOption={(props, option, { setDiseasesValue }) => (
+            <li {...props}>
               <Checkbox
                 icon={icon}
                 checkedIcon={checkedIcon}
                 style={{ marginRight: 8 }}
-                checked={selected}
+                checked={setDiseasesValue}
               />
               {[option.dis_title_et]}
             </li>
           )}
           style={{ width: 500 }}
           renderInput={(params) => (
-            <TextField {...params} label="Haigused" placeholder="Favorites" />
+            <TextField
+              {...params}
+              label="Haigused"
+              placeholder="Vali haigused"
+            />
           )}
         />
-        <div>{diseasesValue.id}</div>
       </Grid>
 
       {/* -------------------------------------------------------------------------------------------------- */}

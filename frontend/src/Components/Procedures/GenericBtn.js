@@ -17,13 +17,7 @@ const classes = {
 const GenericBtn = (props) => {
   const { diseasesValue, setProcedures } = props;
 
-  // const search = useLocation().search;
-  // const diseaseId = new URLSearchParams(search).get();
-
-  // useEffect(() => {
-  //   loadProceduresDiseases();
-  // }, [setDiseasesValue]);
-
+  // Method fetches Procedures depending on diseases
   const loadProceduresDiseases = async () => {
     const idsQuery = diseasesValue
       .map((n, index) => `id[${index}]=${n}`)
@@ -31,22 +25,8 @@ const GenericBtn = (props) => {
     const response = await axios.get(
       `http://localhost:4000/procedures/procedures_diseases?${idsQuery}`
     );
-    setProcedures(response.data[0]);
+    setProcedures(response.data);
   };
-
-  // Router if only diseases had been chosen
-
-  // const loadProceduresTargets = async () => {
-  //   let resource= ""
-  //   switch (EventType) {
-  //     case DISEASE:
-  //       resource = "disease"
-  //   }
-  //   const response = await axios.get(
-  //     "http://localhost:4000/"+resource+"/procedures_targets"
-  //   );
-  //   setProcedures(response.data[0]);
-  // };
 
   return (
     <Button

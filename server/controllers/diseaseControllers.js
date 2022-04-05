@@ -8,7 +8,7 @@ exports.getDiseasesEt = async (req, res, next) => {
   try {
     //let symptom = await Symptom.findById(2);
 
-    let diseases = (await Disease.findByTitleEt())[0];
+    const diseases = (await Disease.findByTitleEt())[0];
 
     res.status(200).json(diseases);
   } catch (error) {
@@ -28,7 +28,7 @@ exports.postNewDisease = async (req, res, next) => {
 
     let disease = new Disease(dis_title_et, dis_title_ru, dis_title_en);
 
-    disease = await disease.saveNewDisease();
+    disease = await Disease.saveNewDisease();
 
     console.log(disease);
     res.send("Created New Disease!");

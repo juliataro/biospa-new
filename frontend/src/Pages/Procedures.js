@@ -47,9 +47,12 @@ export const Procedures = () => {
     <div style={classes.root}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>
+          {/* HEADER */}
           <Typography variant="h4" component="div" gutterBottom>
             Loodus BioSpa on eksklusiivne butiik-SPA
           </Typography>
+
+          {/* INTRO TEXT */}
           <Typography variant="h6" component="div" gutterBottom>
             Mingi intro text
           </Typography>
