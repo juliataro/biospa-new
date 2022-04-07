@@ -11,7 +11,10 @@ const router = express.Router();
 router.route("/procedures_diseases").get(pControllers.getProceduresDiseases);
 
 // !!!!
-// router.route("/procedures_targets").get(pControllers.getProceduresTargets);
+router.route("/procedures_targets").get(pControllers.getProceduresTargets);
+
+router.route("/procedures_symptoms").get(pControllers.getProceduresSymptoms);
+
 // .get(pControllers.getProceduresSymptoms)
 // .get(pControllers.getProceduresPrices)
 

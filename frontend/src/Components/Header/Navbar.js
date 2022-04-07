@@ -34,8 +34,9 @@ function Navbar() {
 
   return (
     <AppBar className={classes.navbar} position="static">
+      <div className={classes.containerTt}>
       <CssBaseline />
-      <Toolbar>
+      <Toolbar className={classes.section}>
         <Link className={classes.logo} to="/">
           <img
             width="100px"
@@ -93,6 +94,7 @@ function Navbar() {
           )}
         </div>
       </Toolbar>
+      </div>
     </AppBar>
   );
 }

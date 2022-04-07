@@ -11,6 +11,9 @@ router.route("/newsymptom").post(sControllers.postNewSymptom);
 // GET symptom by Id
 router.route("/:id").get(sControllers.getSymptomById);
 
+// GET Disease by Language for Fetching in DropDowns
+router.route("/all/et").get(sControllers.getSymptomsEt);
+
 // PUT & DELETE symptom by Id
 router
   .route("/:id")

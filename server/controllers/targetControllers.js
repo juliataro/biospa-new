@@ -73,3 +73,17 @@ exports.deleteTargetById = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getTargetsEt = async (req, res, next) => {
+  try {
+    //let symptom = await Symptom.findById(2);
+
+    const targets = (await Target.findByTitleEt())[0];
+
+    res.status(200).json(targets);
+  } catch (error) {
+    console.log(error);
+    console.log('zdes error');
+    next(error);
+  }
+};

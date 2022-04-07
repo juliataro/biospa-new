@@ -4,23 +4,38 @@ export default makeStyles((theme) => ({
   navbar: {
     backgroundColor: "#fff",
     height: 80,
+    paddingLeft: "2rem",
+    paddingRight: "2rem",
+    display: 'flex',
+    justifyContent: "space-between",
+    margin: "auto",
+    alignContent: "center",
+    alignItems: "center"
   },
 
   logo: {
     cursor: "pointer",
     marginTop: 15,
-    marginLeft: 60,
     marginRight: 40,
+  },
+
+  containerTt: {
+   maxWidth: "1200px",
+   width: "100%"
+  },
+
+  section: {
+    marginLeft: "-17px"
   },
 
   logolinks: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     width: "100vw",
+    marginRight: "-17px"
   },
 
   navlinks: {
-    marginTop: 30,
     display: "flex",
     justifyContent: "space-between",
   },
@@ -30,6 +45,7 @@ export default makeStyles((theme) => ({
     color: "#585c69",
     fontSize: "16px",
     marginLeft: theme.spacing(3),
+    marginTop: "10px"
   },
 
   "&:hover": {

@@ -1,5 +1,21 @@
 const Symptom = require("../models/symptomModel");
 
+/**
+ * DROP-DOWN MENU fetch
+ */
+
+ exports.getSymptomsEt = async (req, res, next) => {
+  try {
+    //let symptom = await Symptom.findById(2);
+
+    const symptoms = (await Symptom.findByTitleEt())[0];
+
+    res.status(200).json(symptoms);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
 /** ------------------------------------------------------------------
  * ADMINS-PANEL controller Methods for Symptom routses
  */

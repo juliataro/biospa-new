@@ -3,9 +3,30 @@ const Procedure = require("../models/procedureModel");
 /** ------------------------------------------------------------------
  * USERS controller Methods for procedures routses
  */
+
+ exports.getProceduresSymptoms = async (req, res, next) => {
+  try {
+    let ids = req.query.id;
+    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let procedures = (
+      await Procedure.findAllProceduresOnSymptoms(idsAsString)
+    )[0]; // Passing ids variable to method
+
+    res.status(200).json(procedures);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+
 exports.getProceduresTargets = async (req, res, next) => {
   try {
-    let procedures = await Procedure.findAllProceduresOnTargets();
+    let ids = req.query.id;
+    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let procedures = (
+      await Procedure.findAllProceduresOnTargets(idsAsString)
+    )[0]; // Passing ids variable to method
 
     res.status(200).json(procedures);
   } catch (error) {

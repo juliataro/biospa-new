@@ -11,6 +11,10 @@ router.route("/newtarget").post(tControllers.postNewTarget);
 // GET target by Id
 router.route("/:id").get(tControllers.getTargetById);
 
+// GET Disease by Language for Fetching in DropDowns
+router.route("/all/et").get(tControllers.getTargetsEt);
+
+
 // PUT & DELETE target by Id
 router
   .route("/:id")

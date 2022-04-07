@@ -27,11 +27,17 @@ class Procedure {
   /**
    *  MySQL statements for Procedures Controller methods
    */
+   static findAllProceduresOnSymptoms(idsAsString) {
+    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
+    INNER JOIN procedures_symptoms INNER JOIN symptoms ON procedures.proc_id=procedures_symptoms.procedures_id
+    AND procedures_symptoms.symptoms_id=symptoms.symp_id WHERE symptoms.symp_id NOT IN (${idsAsString}) ORDER BY procedures.proc_price; `;
+    return db.execute(sql);
+  }
 
-  static findAllProceduresOnTargets() {
-    let sql = `Select proc_title_et, proc_descr_et, proc_duration, proc_price FROM procedures 
-    INNER JOIN procedures_targets ON procedures.id=procedures_targets.procedures_id 
-    INNER JOIN targets ON procedures_targets.targets_id=targets.id;`;
+  static findAllProceduresOnTargets(idsAsString) {
+    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
+    INNER JOIN procedures_targets INNER JOIN targets ON procedures.proc_id=procedures_targets.procedures_id
+    AND procedures_targets.targets_id=targets.tar_id WHERE targets.tar_id NOT IN (${idsAsString}) ORDER BY procedures.proc_price; `;
     return db.execute(sql);
   }
 
@@ -39,10 +45,9 @@ class Procedure {
 
   // Props is the variable from Controllers "getProceduresDiseases" method that holds stringifyed array of ids
   static findAllProceduresOnDiseases(idsAsString) {
-    let sql = `SELECT procedures.proc_title_et,
-    procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price
-    FROM procedures INNER JOIN procedures_diseases INNER JOIN diseases ON procedures.proc_id=procedures_diseases.procedures_id
-     AND procedures_diseases.diseases_id=diseases.dis_id WHERE diseases.dis_id NOT IN (${idsAsString}) ORDER BY procedures.proc_price; `;
+    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
+    INNER JOIN procedures_diseases INNER JOIN diseases ON procedures.proc_id=procedures_diseases.procedures_id 
+    AND procedures_diseases.diseases_id=diseases.dis_id WHERE diseases.dis_id NOT IN (${idsAsString}) ORDER BY procedures.proc_price; `;
     return db.execute(sql);
   }
 
