@@ -11,15 +11,15 @@ const classes = {
   },
   searchBtn: {
     marginTop: "-3rem",
-    marginBottom: "3rem"
+    marginBottom: "3rem",
   },
 };
 
 const GenericBtn = (props) => {
-  const {targetsValue, diseasesValue, symptomsValue, setProcedures} = props;
+  const { targetsValue, diseasesValue, symptomsValue, setProcedures } = props;
 
   // Method fetches Procedures depending on diseases
- const loadProceduresDiseases = async () => {
+  const loadProceduresDiseases = async () => {
     const idsQuery = diseasesValue
       .map((n, index) => `id[${index}]=${n}`)
       .join("&");
@@ -50,22 +50,22 @@ const GenericBtn = (props) => {
     setProcedures(response.data);
   };
 
- return (
+  return (
     <Button
       style={classes.searchBtn}
       spacing={5}
       onClick={() => {
-        //loadProceduresDiseases(diseasesValue.id);
-        //loadProceduresTargets(targetsValue.id);
+        loadProceduresDiseases(diseasesValue.id);
+        loadProceduresTargets(targetsValue.id);
         loadProceduresSymptoms(symptomsValue.id);
       }}
       variant="contained"
     >
       Otsi
     </Button>
-  ); 
- 
- /* return (
+  );
+
+  /* return (
     <Button
       style={classes.searchBtn}
       spacing={5}

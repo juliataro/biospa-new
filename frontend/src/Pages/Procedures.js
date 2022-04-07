@@ -20,13 +20,13 @@ const classes = {
     marginRight: "2rem", */
   },
   intro: {
-    backgroundColor: '#EDEDED',
+    backgroundColor: "#EDEDED",
     color: "#000000",
     paddingTop: "5rem",
     paddingBottom: "5rem",
     paddingLeft: "2rem",
     paddingRight: "2rem",
-    margin: "auto"
+    margin: "auto",
   },
   sec: {
     margin: "auto",
@@ -36,7 +36,7 @@ const classes = {
     margin: "auto",
     maxWidth: "1200px",
     marginTop: "5rem",
-    marginLeft: "-19px !important"
+    marginLeft: "-19px !important",
   },
   container: {
     width: "100%",
@@ -45,16 +45,16 @@ const classes = {
   containerSecond: {
     width: "100%",
     display: "flex",
-    marginTop: "4rem"
+    marginTop: "4rem",
   },
   containerThird: {
     width: "100%",
     display: "flex",
-    marginLeft: "-19px !important"
+    marginLeft: "-19px !important",
   },
   filter: {
     width: "100%",
-    justifyContent: "right"
+    justifyContent: "right",
   },
   paper: {
     padding: 20,
@@ -87,10 +87,9 @@ export const Procedures = () => {
     setDiseasesValue,
     symptoms,
     setSymptoms,
-    symptomsValue, 
+    symptomsValue,
     setSymptomsValue,
   };
-
 
   return (
     <div style={classes.root}>
@@ -106,50 +105,49 @@ export const Procedures = () => {
               Mingi intro text
             </Typography>
           </div>
-          
         </Grid>
       </Grid>
       <div style={classes.secTwo}>
-      <Grid container spacing={3}>
-        {/*This item will be 12 units on extra small screens */}
-        {/*But will be 6 units on small screens */}
-        <div style={classes.container}>
-          <Grid item xs={12} sm={6}>
-            <DropTargets 
-              {...obj}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <DropSymptoms 
-               {...obj}
-            />
-          </Grid>
-        </div>
-      </Grid>
-      
-      <Grid container spacing={3}>
-        {/*This item will be 12 units on extra small screens */}
-        {/*But will be 6 units on small screens */}
-        <div style={classes.containerSecond}>
-        <Grid item xs={12} sm={6}>
-          <DropDiseases
-            {...obj} ///////////////////////////// All states and setStates are in one variable
-          />
+        <Grid container spacing={3}>
+          {/*This item will be 12 units on extra small screens */}
+          {/*But will be 6 units on small screens */}
+          <div style={classes.container}>
+            <Grid item xs={12} sm={6}>
+              <DropTargets {...obj} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <DropSymptoms {...obj} />
+            </Grid>
+          </div>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Slider />
+
+        <Grid container spacing={3}>
+          {/*This item will be 12 units on extra small screens */}
+          {/*But will be 6 units on small screens */}
+          <div style={classes.containerSecond}>
+            <Grid item xs={12} sm={6}>
+              <DropDiseases
+                {...obj} ///////////////////////////// All states and setStates are in one variable
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Slider />
+            </Grid>
+          </div>
         </Grid>
-        </div>
-      </Grid>
       </div>
       <div style={classes.secTwo}>
-      <Grid style={classes.containerThird} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={12}>
-          <ProceduresList {...obj} />
+        <Grid
+          style={classes.containerThird}
+          container
+          rowSpacing={1}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        >
+          <Grid item xs={12}>
+            <ProceduresList {...obj} />
+          </Grid>
         </Grid>
-      </Grid>
       </div>
-      
     </div>
   );
 };

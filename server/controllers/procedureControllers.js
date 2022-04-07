@@ -4,7 +4,7 @@ const Procedure = require("../models/procedureModel");
  * USERS controller Methods for procedures routses
  */
 
- exports.getProceduresSymptoms = async (req, res, next) => {
+exports.getProceduresSymptoms = async (req, res, next) => {
   try {
     let ids = req.query.id;
     let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
@@ -18,7 +18,6 @@ const Procedure = require("../models/procedureModel");
     next(error);
   }
 };
-
 
 exports.getProceduresTargets = async (req, res, next) => {
   try {
@@ -42,10 +41,10 @@ exports.getProceduresTargets = async (req, res, next) => {
 exports.getProceduresDiseases = async (req, res, next) => {
   try {
     //Access the provided 'id' as query parameter that is passing to button
-    let ids = req.query.id;
-    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let disIds = req.query.id;
+    let disIdsStr = disIds.toString(); // To stringify array of ids to pass it to models SQL clause
     let procedures = (
-      await Procedure.findAllProceduresOnDiseases(idsAsString)
+      await Procedure.findAllProceduresOnDiseases(disIdsStr)
     )[0]; // Passing ids variable to method
 
     // Returning the procedures to the rendering engine

@@ -214,7 +214,14 @@ export default function EnhancedTable(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [procedures, setProcedures] = useState([]);
-  const { diseasesValue, setDiseasesValue, targetsValue, setTargetsValue, symptomsValue, setSymptomsValue} = props;
+  const {
+    diseasesValue,
+    setDiseasesValue,
+    targetsValue,
+    setTargetsValue,
+    symptomsValue,
+    setSymptomsValue,
+  } = props;
 
   //   useEffect(() => {
   //     loadProcedures();
@@ -282,26 +289,21 @@ export default function EnhancedTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - procedures.length) : 0;
 
-  const dropDiseasValues = {
+  const chosenValues = {
     diseasesValue,
     setDiseasesValue,
-  };
-
-  const dropTargetsValues = {
     targetsValue,
     setTargetsValue,
-  };
-
-  const dropSymptomsValues = {
     symptomsValue,
     setSymptomsValue,
   };
+
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
       <GenericBtn
         id={symptomsValue.id}
-        {...dropSymptomsValues}
+        {...chosenValues}
         setProcedures={setProcedures}
       />
 
