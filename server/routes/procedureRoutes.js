@@ -8,23 +8,31 @@ const router = express.Router();
 //   http://localhost:4000/procedures/procedures-diseases
 
 // Here Added On in name to show Only Procedures that Depends On Definite procedures
+
 router.route("/procedures_diseases").get(pControllers.getProceduresDiseases);
 
 router.route("/procedures_targets").get(pControllers.getProceduresTargets);
 
 router.route("/procedures_symptoms").get(pControllers.getProceduresSymptoms);
 
-// .get(pControllers.getProceduresSymptoms)
-// .get(pControllers.getProceduresPrices)
+router.route("/procedures_prices").get(pControllers.getProceduresPrices);
 
-//   .get(pControllers.getProceduresTargetsSymptoms)
-//   .get(pControllers.getProceduresTargetsDiseases)
+router.route("/procTarSymp").get(pControllers.getProceduresTargetsSymptoms);
+
+// router.route("/procAllFilters").get(pControllers.getProceduresAllFilters);
+
+// !!  .get(pControllers.getProceduresTargetsSymptoms)
+// !!  .get(pControllers.getProceduresTargetsDiseases)
+// !! .get(pControllers.getProceduresSymptomsDiseases)
+
 //   .get(pControllers.getProceduresTargetsPrice)
-
 //   .get(pControllers.getProceduresSymptomsPrice)
-//   .get(pControllers.getProceduresSymptomsDiseases)
+//   .get(pControllers.getProceduresDiseasesPrice)
 
-//   .get(pControllers.getProceduresTargetsSymptomsDiseases);
+// !!  .get(pControllers.getProceduresTargetsSymptomsDiseases);
+//   .get(pControllers.getProceduresTargetsSymptomsPrice);
+//   .get(pControllers.getProceduresSymptomsDiseasesPrice);
+//   .get(pControllers.getProceduresTargetsDiseasesPrice);
 
 /** ------------------------------------------------------------------
  * Routses GET && POST && PUT && DELETE /procedures/ for Admin-panel

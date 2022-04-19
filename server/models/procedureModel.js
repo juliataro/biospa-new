@@ -24,26 +24,52 @@ class Procedure {
     this.proc_price = proc_price;
   }
 
+  //getAllProcOnTarAndSymp
+
   /**
    *  MySQL statements for Procedures Controller methods
    */
-  static findAllProceduresOnSymptoms(idsAsString) {
+
+  // Procedures on Any Filters
+
+  // Procedures on Targets and Symptoms
+  static getAllProcOnTarAndSymp() {
+    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
+    INNER JOIN procedures_targets INNER JOIN targets INNER JOIN procedures_symptoms INNER JOIN symptoms 
+    ON procedures.proc_id=procedures_targets.procedures_id AND procedures_targets.targets_id=targets.tar_id 
+    AND procedures.proc_id=procedures_symptoms.procedures_id AND procedures_symptoms.symptoms_id=symptoms.symp_id 
+    WHERE targets.tar_id IN (${sympIdsString}) AND symptoms.symp_id IN (${sympIdsString}) ORDER BY procedures.proc_price;`;
+    return db.execute(sql);
+  }
+
+  // // Procedures on Prices.   procPriceStr
+  // static findAllProceduresOnPrices(priceMaxNum) {
+  //   let sql = `SELECT proc_title_et, proc_descr_et, proc_duration, proc_price FROM procedures WHERE proc_price <= $1 ORDER BY procedures.proc_price;`, [priceMaxNum];
+  //   return db.execute(sql);
+  // }
+
+  static findAllProceduresOnPrices(priceMaxNum) {
+    let sql = `SELECT proc_title_et, proc_descr_et, proc_duration, proc_price FROM procedures WHERE proc_price <= ${priceMaxNum} ORDER BY procedures.proc_price;`;
+    return db.execute(sql);
+  }
+
+  // Procedures on Symptoms
+  static findAllProceduresOnSymptoms(sympIdsString) {
     let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
     INNER JOIN procedures_symptoms INNER JOIN symptoms ON procedures.proc_id=procedures_symptoms.procedures_id
-    AND procedures_symptoms.symptoms_id=symptoms.symp_id WHERE symptoms.symp_id IN (${idsAsString}) ORDER BY procedures.proc_price; `;
+    AND procedures_symptoms.symptoms_id=symptoms.symp_id WHERE symptoms.symp_id IN (${sympIdsString}) ORDER BY procedures.proc_price; `;
     return db.execute(sql);
   }
 
-  static findAllProceduresOnTargets(idsAsString) {
+  // Procedures on Targets
+  static findAllProceduresOnTargets(tarIdsString) {
     let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
     INNER JOIN procedures_targets INNER JOIN targets ON procedures.proc_id=procedures_targets.procedures_id
-    AND procedures_targets.targets_id=targets.tar_id WHERE targets.tar_id IN (${idsAsString}) ORDER BY procedures.proc_price; `;
+    AND procedures_targets.targets_id=targets.tar_id WHERE targets.tar_id IN (${tarIdsString}) ORDER BY procedures.proc_price; `;
     return db.execute(sql);
   }
 
-  //
-
-  // Props is the variable from Controllers "getProceduresDiseases" method that holds stringifyed array of ids
+  // Procedures on Diseases
   static findAllProceduresOnDiseases(disIdsStr) {
     let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
     INNER JOIN procedures_diseases INNER JOIN diseases ON procedures.proc_id=procedures_diseases.procedures_id 
@@ -86,6 +112,11 @@ class Procedure {
 
   static deleteById(proc_id) {
     let sql = `DELETE FROM procedures WHERE proc_id = ${proc_id};`;
+    return db.execute(sql);
+  }
+
+  static findByPrice() {
+    let sql = `SELECT proc_id, proc_price FROM procedures;`;
     return db.execute(sql);
   }
 }

@@ -4,12 +4,44 @@ const Procedure = require("../models/procedureModel");
  * USERS controller Methods for procedures routses
  */
 
+//  Method fetches Procedures dependent on any filtering
+
+// exports.getProceduresAnyFilters = async (req, res, next) => {
+//   try {
+//     /// siia tuleb kood
+//     const procedures = (
+//       await Procedure.findAllProceduresOnAnyfilters(midagi)
+//     )[0];
+//     res.status(200).json(procedures);
+//   } catch (error) {
+//     console.log(error);
+//     next(error);
+//   }
+// };
+
+//  Method fetches Procedures dependendent on Symptoms values and ids
+
+//Get all Procedures on Prices
+exports.getProceduresPrices = async (req, res, next) => {
+  try {
+    let priceMax = req.query.maxPrice; // Catching query parameters maxPrice from GenericBtn route
+    let priceMaxNum = Number(priceMax); // Transform to number from string
+    const procedures = (
+      await Procedure.findAllProceduresOnPrices(priceMaxNum)
+    )[0];
+    res.status(200).json(procedures);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 exports.getProceduresSymptoms = async (req, res, next) => {
   try {
-    let ids = req.query.id;
-    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let sympIds = req.query.id;
+    let sympIdsString = sympIds.toString(); // To stringify array of ids to pass it to models SQL clause
     let procedures = (
-      await Procedure.findAllProceduresOnSymptoms(idsAsString)
+      await Procedure.findAllProceduresOnSymptoms(sympIdsString)
     )[0]; // Passing ids variable to method
 
     res.status(200).json(procedures);
@@ -18,13 +50,14 @@ exports.getProceduresSymptoms = async (req, res, next) => {
     next(error);
   }
 };
+//  Method fetches Procedures dependendent on Targets values and ids
 
 exports.getProceduresTargets = async (req, res, next) => {
   try {
-    let ids = req.query.id;
-    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let tarIds = req.query.id;
+    let tarIdsString = tarIds.toString(); // To stringify array of ids to pass it to models SQL clause
     let procedures = (
-      await Procedure.findAllProceduresOnTargets(idsAsString)
+      await Procedure.findAllProceduresOnTargets(tarIdsString)
     )[0]; // Passing ids variable to method
 
     res.status(200).json(procedures);
@@ -34,9 +67,32 @@ exports.getProceduresTargets = async (req, res, next) => {
   }
 };
 
-/**
- *  Method that fetches Procedures dependendent on Diseaes values and ids.
- **/
+// exports.getProceduresTargetsSymptoms = async (req, res, next) => {
+//   try {
+//     let sympIds = req.query.id;
+//     let sympIdsString = sympIds.toString(); // To stringify array of ids to pass it to models SQL clause
+//     let procedures = (await Procedure.getAllProcOnTarAndSymp(sympIdsString))[0]; // Passing ids variable to method
+
+//     res.status(200).json(procedures);
+//   } catch (error) {
+//     console.log(error);
+//     next(error);
+//   }
+// };
+exports.getProceduresTargetsSymptoms = async (req, res, next) => {
+  try {
+    let sympIds = req.query.id;
+    let sympIdsString = sympIds.toString(); // To stringify array of ids to pass it to models SQL clause
+    let procedures = (await Procedure.getAllProcOnTarAndSymp(sympIdsString))[0]; // Passing ids variable to method
+
+    res.status(200).json(procedures);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+//  Method fetches Procedures dependendent on Diseaes values and ids
 
 exports.getProceduresDiseases = async (req, res, next) => {
   try {
@@ -54,6 +110,7 @@ exports.getProceduresDiseases = async (req, res, next) => {
     next(error);
   }
 };
+// getProceduresPrices
 
 //
 //
@@ -111,7 +168,7 @@ exports.getProcedureById = async (req, res, next) => {
   try {
     let [procedure, _] = await Procedure.findById(req.params.id);
 
-    res.status(200).json({ procedure });
+    res.status(200).json(procedure);
     res.send(rows);
   } catch (error) {
     console.log(error);
