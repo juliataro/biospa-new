@@ -10,18 +10,22 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
     margin: "auto",
     alignContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingRight: "30px",
+    paddingLeft: "30px"
   },
 
   logo: {
     cursor: "pointer",
-    marginTop: 15,
+    marginTop: 5,
     marginRight: 40,
   },
 
   containerTt: {
    maxWidth: "1200px",
-   width: "100%"
+   width: "100%", 
+   paddingRight: "28px",
+   paddingLeft: "28px"
   },
 
   section: {
@@ -38,14 +42,17 @@ export default makeStyles((theme) => ({
   navlinks: {
     display: "flex",
     justifyContent: "space-between",
+    marginRight: -15
   },
 
   link: {
     textDecoration: "none",
     color: "#585c69",
     fontSize: "16px",
-    marginLeft: theme.spacing(3),
-    marginTop: "10px"
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: "10px",
+    letterSpacing: "0.02071em"
   },
 
   "&:hover": {

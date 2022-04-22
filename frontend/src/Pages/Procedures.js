@@ -12,31 +12,33 @@ import Typography from "@mui/material/Typography";
 import ProceduresList from "../Components/Procedures/ProceduresList";
 import DropDiseases from "../Components/Procedures/DropDiseases";
 
-// import axios from "axios";
 
 const classes = {
   root: {
-    /* marginLeft: "2rem",
-    marginRight: "2rem", */
+   
   },
   intro: {
-    backgroundColor: '#EDEDED',
+    backgroundColor: "#EDEDED",
     color: "#000000",
     paddingTop: "5rem",
     paddingBottom: "5rem",
     paddingLeft: "2rem",
     paddingRight: "2rem",
-    margin: "auto"
+    margin: "auto",
   },
   sec: {
     margin: "auto",
     maxWidth: "1200px",
+    paddingRight: "30px",
+    paddingLeft: "30px"
   },
   secTwo: {
     margin: "auto",
     maxWidth: "1200px",
     marginTop: "5rem",
-    marginLeft: "-19px !important"
+    marginLeft: "-19px !important",
+    paddingRight: "30px",
+    paddingLeft: "30px"
   },
   container: {
     width: "100%",
@@ -45,16 +47,14 @@ const classes = {
   containerSecond: {
     width: "100%",
     display: "flex",
-    marginTop: "4rem"
+    marginTop: "4rem",
   },
-  containerThird: {
-    width: "100%",
-    display: "flex",
-    marginLeft: "-19px !important"
+  secResult: {
+    marginLeft: 6,
   },
   filter: {
     width: "100%",
-    justifyContent: "right"
+    justifyContent: "right",
   },
   paper: {
     padding: 20,
@@ -74,6 +74,7 @@ export const Procedures = () => {
   const [targetsValue, setTargetsValue] = useState([]); // Responsible for catching chousen ID in dropdown
   const [symptoms, setSymptoms] = useState([]);
   const [symptomsValue, setSymptomsValue] = useState([]); // Responsible for catching chousen ID in dropdown
+  const [priceValue, setPriceValue] = useState([]);
 
   // One variable for all useStates for passing
   const obj = {
@@ -87,10 +88,11 @@ export const Procedures = () => {
     setDiseasesValue,
     symptoms,
     setSymptoms,
-    symptomsValue, 
+    symptomsValue,
     setSymptomsValue,
+    priceValue,
+    setPriceValue,
   };
-
 
   return (
     <div style={classes.root}>
@@ -98,7 +100,7 @@ export const Procedures = () => {
         <Grid item xs={12} style={classes.intro}>
           {/* HEADER */}
           <div style={classes.sec}>
-            <Typography variant="h4" component="div" gutterBottom>
+            <Typography variant="h4" component="div" gutterBottom style={{maxWidth: "45%"}}>
               Loodus BioSpa on eksklusiivne butiik-SPA
             </Typography>
             {/* INTRO TEXT */}
@@ -106,50 +108,50 @@ export const Procedures = () => {
               Mingi intro text
             </Typography>
           </div>
-          
         </Grid>
       </Grid>
       <div style={classes.secTwo}>
-      <Grid container spacing={3}>
-        {/*This item will be 12 units on extra small screens */}
-        {/*But will be 6 units on small screens */}
-        <div style={classes.container}>
-          <Grid item xs={12} sm={6}>
-            <DropTargets 
-              {...obj}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <DropSymptoms 
-               {...obj}
-            />
-          </Grid>
-        </div>
-      </Grid>
-      
-      <Grid container spacing={3}>
-        {/*This item will be 12 units on extra small screens */}
-        {/*But will be 6 units on small screens */}
-        <div style={classes.containerSecond}>
-        <Grid item xs={12} sm={6}>
-          <DropDiseases
-            {...obj} ///////////////////////////// All states and setStates are in one variable
-          />
+        <Grid container spacing={3}>
+          {/*This item will be 12 units on extra small screens */}
+          {/*But will be 6 units on small screens */}
+          <div style={classes.container}>
+            <Grid item xs={12} sm={6}>
+              <DropTargets {...obj} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <DropSymptoms {...obj} />
+            </Grid>
+          </div>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Slider />
+
+        <Grid container spacing={3}>
+          {/*This item will be 12 units on extra small screens */}
+          {/*But will be 6 units on small screens */}
+          <div style={classes.containerSecond}>
+            <Grid item xs={12} sm={6}>
+              <DropDiseases
+                {...obj}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Slider 
+                {...obj}
+                />
+            </Grid>
+          </div>
         </Grid>
-        </div>
-      </Grid>
       </div>
       <div style={classes.secTwo}>
-      <Grid style={classes.containerThird} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={12}>
-          <ProceduresList {...obj} />
+        <Grid
+          container
+          rowSpacing={1}
+          style={classes.secResult}
+        >
+          <Grid item xs={12}>
+            <ProceduresList {...obj} />
+          </Grid>
         </Grid>
-      </Grid>
       </div>
-      
     </div>
   );
 };

@@ -214,12 +214,17 @@ export default function EnhancedTable(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [procedures, setProcedures] = useState([]);
-  const { diseasesValue, setDiseasesValue, targetsValue, setTargetsValue, symptomsValue, setSymptomsValue} = props;
+  const {
+    diseasesValue,
+    setDiseasesValue,
+    targetsValue,
+    setTargetsValue,
+    symptomsValue, 
+    setSymptomsValue,
+    priceValue,
+    setPriceValue
+  } = props;
 
-  //   useEffect(() => {
-  //     loadProcedures();
-  //   }, []);
-  //   console.log(procedures);
 
   // Tabele header arrows for sorting
   const handleRequestSort = (event, property) => {
@@ -282,26 +287,24 @@ export default function EnhancedTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - procedures.length) : 0;
 
-  const dropDiseasValues = {
-    diseasesValue,
-    setDiseasesValue,
-  };
-
-  const dropTargetsValues = {
+ const chosenValues = {
     targetsValue,
     setTargetsValue,
-  };
-
-  const dropSymptomsValues = {
-    symptomsValue,
+    diseasesValue,
+    setDiseasesValue,
+    symptomsValue, 
     setSymptomsValue,
-  };
+    priceValue,
+     setPriceValue
+  }; 
+
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
       <GenericBtn
         id={symptomsValue.id}
-        {...dropSymptomsValues}
+        {...chosenValues}
+        priceValue={priceValue}
         setProcedures={setProcedures}
       />
 

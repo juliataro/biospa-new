@@ -8,11 +8,4 @@ const pool = mysql.createPool({
   password: process.env.DB_PASS,
 });
 
-// let sql = "SELECT * FROM symptoms;";
-
-// pool.execute(sql, function (err, result) {
-//   if (err) throw err;
-//   console.log(result);
-// });
-
 module.exports = pool.promise();

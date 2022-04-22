@@ -21,17 +21,6 @@ function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  // const [Choices, setChoices] = useState("dis_title_et");
-
-  // const loadChoices = async () => {
-  //   const response = await axios.get("http://localhost:4000/diseases/");
-  //   setChoices
-  // };
-
-  // useEffect(() => {
-  //   loadData();
-  // }, [Choices]);
-
   return (
     <AppBar className={classes.navbar} position="static">
       <div className={classes.containerTt}>
@@ -39,7 +28,7 @@ function Navbar() {
       <Toolbar className={classes.section}>
         <Link className={classes.logo} to="/">
           <img
-            width="100px"
+            width="120px"
             height="auto"
             className="img-responsive"
             src={logo}
@@ -52,13 +41,13 @@ function Navbar() {
           ) : (
             <div className={classes.navlinks}>
               <Link to="/" className={classes.link}>
-                Procedurite eelkatse
+                Protseduuride eelkatse
               </Link>
               <Link to="/about" className={classes.link}>
                 Meist
               </Link>
-              <div className={classes.languages}>
-                {/* <Link
+              {/*<div className={classes.languages}>
+                <Link
                   onClick={() => setLangChoices("dis_title_et")}
                   to="/estonian"
                   className={classes.link}
@@ -76,7 +65,7 @@ function Navbar() {
                   className={classes.link}
                 >
                   EN
-                </Link> */}
+                </Link> 
               </div>
 
               <Stack direction="row" spacing={2}>
@@ -89,7 +78,7 @@ function Navbar() {
                 >
                   Registreeri
                 </Button>
-              </Stack>
+              </Stack>*/}
             </div>
           )}
         </div>

@@ -4,28 +4,14 @@ const Procedure = require("../models/procedureModel");
  * USERS controller Methods for procedures routses
  */
 
- exports.getProceduresSymptoms = async (req, res, next) => {
-  try {
-    let ids = req.query.id;
-    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
-    let procedures = (
-      await Procedure.findAllProceduresOnSymptoms(idsAsString)
-    )[0]; // Passing ids variable to method
-
-    res.status(200).json(procedures);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
-
+//  Method fetches Procedures dependendent on Targets values and ids
 
 exports.getProceduresTargets = async (req, res, next) => {
   try {
-    let ids = req.query.id;
-    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let tarIds = req.query.id;
+    let tarIdsString = tarIds.toString(); // To stringify array of ids to pass it to models SQL clause
     let procedures = (
-      await Procedure.findAllProceduresOnTargets(idsAsString)
+      await Procedure.findAllProceduresOnTargets(tarIdsString)
     )[0]; // Passing ids variable to method
 
     res.status(200).json(procedures);
@@ -35,17 +21,60 @@ exports.getProceduresTargets = async (req, res, next) => {
   }
 };
 
-/**
- *  Method that fetches Procedures dependendent on Diseaes values and ids.
- **/
+exports.getProceduresPrices = async (req, res, next) => {
+  try {
+
+    if (req.query.tarid) {
+      let tarIds = req.query.tarid;
+      tarIdsString = tarIds.toString();
+    } else {
+      tarIdsString = null;
+    }
+
+    if (req.query.pricemin && req.query.pricemax) {
+      priceMin = req.query.pricemin;
+      priceMax = req.query.pricemax;
+    } else {
+      priceMin = null;
+      priceMax = null;
+    }
+
+    if (req.query.sympid) {
+      let sympIds = req.query.sympid;
+      sympIdsString = sympIds.toString(); 
+    } else {
+      sympIdsString = null;
+    }
+
+    if (req.query.disid) {
+      let disIds = req.query.disid;
+      disIdsString = disIds.toString(); 
+    } else {
+      disIdsString = null;
+    }
+  
+    console.log('price', priceMin, priceMax, tarIdsString, sympIdsString, disIdsString);
+      let procedures = (
+        await Procedure.findAllProceduresOnPrice(priceMin, priceMax, tarIdsString, sympIdsString, disIdsString)
+      )[0]; // Passing ids variable to method
+      res.status(200).json(procedures);
+
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+
+//  Method fetches Procedures dependendent on Diseaes values and ids
 
 exports.getProceduresDiseases = async (req, res, next) => {
   try {
     //Access the provided 'id' as query parameter that is passing to button
-    let ids = req.query.id;
-    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let disIds = req.query.id;
+    let disIdsStr = disIds.toString(); // To stringify array of ids to pass it to models SQL clause
     let procedures = (
-      await Procedure.findAllProceduresOnDiseases(idsAsString)
+      await Procedure.findAllProceduresOnDiseases(disIdsStr)
     )[0]; // Passing ids variable to method
 
     // Returning the procedures to the rendering engine
@@ -56,8 +85,37 @@ exports.getProceduresDiseases = async (req, res, next) => {
   }
 };
 
-//
-//
+
+//  Method fetches Procedures dependendent on Symptoms values and ids
+
+exports.getProceduresSymptoms = async (req, res, next) => {
+  try {
+    let sympIds = req.query.id;
+    let sympIdsString = sympIds.toString(); // To stringify array of ids to pass it to models SQL clause
+    let procedures = (
+      await Procedure.findAllProceduresOnSymptoms(sympIdsString)
+    )[0]; // Passing ids variable to method
+
+    res.status(200).json(procedures);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+exports.getProceduresTargetsSymptoms = async (req, res, next) => {
+  try {
+    let sympIds = req.query.id;
+    let sympIdsString = sympIds.toString(); // To stringify array of ids to pass it to models SQL clause
+    let procedures = (await Procedure.getAllProcOnTarAndSymp(sympIdsString))[0]; // Passing ids variable to method
+
+    res.status(200).json(procedures);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 
 /** ------------------------------------------------------------------
  * ADMINS-PANEL controller Methods for procedures routses
@@ -112,13 +170,26 @@ exports.getProcedureById = async (req, res, next) => {
   try {
     let [procedure, _] = await Procedure.findById(req.params.id);
 
-    res.status(200).json({ procedure });
+    res.status(200).json(procedure);
     res.send(rows);
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
+
+exports.getProcedureByPrice = async (req, res, next) => {
+  try {
+    let [procedure, _] = await Procedure.findById(req.params.id);
+
+    res.status(200).json(procedure);
+    res.send(rows);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 
 // Update Procedure By Id
 exports.updateProcedureById = async (req, res, next) => {};

@@ -3,29 +3,28 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 
-function valuetext(value) {
-  return `${value}°C`;
-}
+export default function RangeSlider(props) {
+  const  {priceValue, setPriceValue} = props;
+  const [price, setPrice] = React.useState([20, 37]);
 
-export default function RangeSlider() {
-  const [value, setValue] = React.useState([20, 37]);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  function handleSelectChange(event, newValues) {
+    setPrice(newValues.map((priceValue) => priceValue));
+    setPriceValue(priceValue => price);
+    console.log(priceValue);
+  }
 
   return (
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: "100%", marginLeft: "30px", paddingRight: "30px" }}>
       <Typography id="input-slider" gutterBottom>
         Hind
       </Typography>
       <Slider
-        getAriaLabel={() => "Temperature range"}
-        value={value}
-        onChange={handleChange}
+        getAriaLabel={() => "Hinnavahemik"}
+        value={price}
+        onChange={handleSelectChange}
         valueLabelDisplay="auto"
-        getAriaValueText={valuetext}
       />
     </Box>
   );
 }
+

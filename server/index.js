@@ -12,23 +12,6 @@ var corsOptions = {
 // Allowing to make calls from frontend to backend api
 app.use(cors(corsOptions));
 
-// app.use((req, rew, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Origin",
-//     "Origin",
-//     "X-Requested-With",
-//     "Content-Type",
-//     "Accept",
-//     "Authorization"
-//   );
-//   if (req.method === "OPTIONS") {
-//     req.header("Access-Control-Allow-Origin", "PUT, POST, PATCH, DELETE, GET");
-//     return res.status(200).json({});
-//   }
-//   next();
-// });
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
