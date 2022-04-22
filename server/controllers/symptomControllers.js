@@ -4,7 +4,7 @@ const Symptom = require("../models/symptomModel");
  * DROP-DOWN MENU fetch
  */
 
- exports.getSymptomsEt = async (req, res, next) => {
+exports.getSymptomsEt = async (req, res, next) => {
   try {
     //let symptom = await Symptom.findById(2);
 
@@ -40,7 +40,7 @@ exports.getAllSymptoms = async (req, res, next) => {
   try {
     let symptoms = await Symptom.findAll();
 
-    res.status(200).json({ symptoms });
+    res.status(200).json(symptoms);
     res.send(rows);
   } catch (error) {
     console.log(error);
@@ -55,7 +55,7 @@ exports.getSymptomById = async (req, res, next) => {
 
     let [symptom, _] = await Symptom.findById(req.params.id);
 
-    res.status(200).json({ symptom });
+    res.status(200).json(symptom);
     res.send(rows);
   } catch (error) {
     console.log(error);

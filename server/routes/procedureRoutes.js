@@ -9,17 +9,17 @@ const router = express.Router();
 
 // Here Added On in name to show Only Procedures that Depends On Definite procedures
 
-router.route("/procedures_diseases").get(pControllers.getProceduresDiseases);
+// router.route("/proc_all_filters").get(pControllers.getProceduresAnyFilters);
 
-router.route("/procedures_targets").get(pControllers.getProceduresTargets);
+// router.route("/procedures_diseases").get(pControllers.getProceduresDiseases);
 
-router.route("/procedures_symptoms").get(pControllers.getProceduresSymptoms);
+// router.route("/procedures_targets").get(pControllers.getProceduresTargets);
 
-router.route("/procedures_prices").get(pControllers.getProceduresPrices);
+// router.route("/procedures_symptoms").get(pControllers.getProceduresSymptoms);
+
+// router.route("/procedures_prices").get(pControllers.getProceduresPrices);
 
 router.route("/procTarSymp").get(pControllers.getProceduresTargetsSymptoms);
-
-// router.route("/procAllFilters").get(pControllers.getProceduresAllFilters);
 
 // !!  .get(pControllers.getProceduresTargetsSymptoms)
 // !!  .get(pControllers.getProceduresTargetsDiseases)

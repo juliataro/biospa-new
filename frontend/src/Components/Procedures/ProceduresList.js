@@ -221,6 +221,8 @@ export default function EnhancedTable(props) {
     setTargetsValue,
     symptomsValue,
     setSymptomsValue,
+    pricesValue,
+    setPricesValue,
   } = props;
 
   //   useEffect(() => {
@@ -296,16 +298,14 @@ export default function EnhancedTable(props) {
     setTargetsValue,
     symptomsValue,
     setSymptomsValue,
+    pricesValue,
+    setPricesValue,
   };
 
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
-      <GenericBtn
-        id={symptomsValue.id}
-        {...chosenValues}
-        setProcedures={setProcedures}
-      />
+      <GenericBtn {...chosenValues} setProcedures={setProcedures} />
 
       {/*  Table consistens */}
       <Paper sx={{ width: "100%", mb: 2 }}>

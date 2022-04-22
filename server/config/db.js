@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const mysql = require("mysql2");
 
 const pool = mysql.createPool({
@@ -6,13 +7,37 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   database: process.env.DB_NAME,
   password: process.env.DB_PASS,
+  namedPlaceholders: true,
 });
 
-// let sql = "SELECT * FROM symptoms;";
+module.exports = pool.promise();
 
-// pool.execute(sql, function (err, result) {
-//   if (err) throw err;
-//   console.log(result);
+// require("dotenv").config();
+// const mqp = require('mysql-query-placeholders');
+// const mysql = require('mysql2').createConnection...
+
+// const pool = mysql.createPool({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   database: process.env.DB_NAME,
+//   password: process.env.DB_PASS,
+//   namedPlaceholders: true,
 // });
 
-module.exports = pool.promise();
+//
+// module.exports = pool.promise();
+
+//  require("dotenv").config();
+// const mysql = require("mysql2/promise");
+
+// console.log("Creating connection pool...")
+
+// const pool = mysql.createPool({
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     database: process.env.DB_NAME,
+//     password: process.env.DB_PASS,
+//     namedPlaceholders: true
+// })
+
+// module.exports = pool;

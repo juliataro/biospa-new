@@ -35,30 +35,30 @@ function Navbar() {
   return (
     <AppBar className={classes.navbar} position="static">
       <div className={classes.containerTt}>
-      <CssBaseline />
-      <Toolbar className={classes.section}>
-        <Link className={classes.logo} to="/">
-          <img
-            width="100px"
-            height="auto"
-            className="img-responsive"
-            src={logo}
-            alt="logo"
-          />
-        </Link>
-        <div className={classes.logolinks}>
-          {isMobile ? (
-            <DrawerComponent />
-          ) : (
-            <div className={classes.navlinks}>
-              <Link to="/" className={classes.link}>
-                Procedurite eelkatse
-              </Link>
-              <Link to="/about" className={classes.link}>
-                Meist
-              </Link>
-              <div className={classes.languages}>
-                {/* <Link
+        <CssBaseline />
+        <Toolbar className={classes.section}>
+          <Link className={classes.logo} to="/">
+            <img
+              width="100px"
+              height="auto"
+              className="img-responsive"
+              src={logo}
+              alt="logo"
+            />
+          </Link>
+          <div className={classes.logolinks}>
+            {isMobile ? (
+              <DrawerComponent />
+            ) : (
+              <div className={classes.navlinks}>
+                <Link to="/" className={classes.link}>
+                  Procedurite eelkatse
+                </Link>
+                <Link to="/about" className={classes.link}>
+                  Meist
+                </Link>
+                <div className={classes.languages}>
+                  {/* <Link
                   onClick={() => setLangChoices("dis_title_et")}
                   to="/estonian"
                   className={classes.link}
@@ -77,23 +77,23 @@ function Navbar() {
                 >
                   EN
                 </Link> */}
+                </div>
+
+                <Stack direction="row" spacing={2}>
+                  <Button variant="outlined">Loogi Sisse</Button>
+
+                  <Button
+                    className={classes.button}
+                    variant="contained"
+                    href="#contained-buttons"
+                  >
+                    Registreeri
+                  </Button>
+                </Stack>
               </div>
-
-              <Stack direction="row" spacing={2}>
-                <Button variant="outlined">Loogi Sisse</Button>
-
-                <Button
-                  className={classes.button}
-                  variant="contained"
-                  href="#contained-buttons"
-                >
-                  Registreeri
-                </Button>
-              </Stack>
-            </div>
-          )}
-        </div>
-      </Toolbar>
+            )}
+          </div>
+        </Toolbar>
       </div>
     </AppBar>
   );

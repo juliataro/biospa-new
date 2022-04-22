@@ -29,13 +29,16 @@ app.use(cors(corsOptions));
 //   next();
 // });
 
+// Using .use() method to use as middleware in App
+
+// Analise requests from req.body in this middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Middleware parse json bodies in the request object
 app.use(express.json());
 
-// Redirect requests to endpoint starting with /procedures to getProsedures.js
+// Redirect requests to endpoint starting with /entity to matching folders /route/file
 app.use("/procedures", require("./routes/procedureRoutes"));
 app.use("/symptoms", require("./routes/symptomRoutes"));
 app.use("/targets", require("./routes/targetRoutes"));

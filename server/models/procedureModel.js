@@ -24,61 +24,89 @@ class Procedure {
     this.proc_price = proc_price;
   }
 
-  //getAllProcOnTarAndSymp
-
   /**
    *  MySQL statements for Procedures Controller methods
    */
 
   // Procedures on Any Filters
 
-  // Procedures on Targets and Symptoms
-  static getAllProcOnTarAndSymp() {
-    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
-    INNER JOIN procedures_targets INNER JOIN targets INNER JOIN procedures_symptoms INNER JOIN symptoms 
-    ON procedures.proc_id=procedures_targets.procedures_id AND procedures_targets.targets_id=targets.tar_id 
-    AND procedures.proc_id=procedures_symptoms.procedures_id AND procedures_symptoms.symptoms_id=symptoms.symp_id 
-    WHERE targets.tar_id IN (${sympIdsString}) AND symptoms.symp_id IN (${sympIdsString}) ORDER BY procedures.proc_price;`;
-    return db.execute(sql);
-  }
-
-  // // Procedures on Prices.   procPriceStr
-  // static findAllProceduresOnPrices(priceMaxNum) {
-  //   let sql = `SELECT proc_title_et, proc_descr_et, proc_duration, proc_price FROM procedures WHERE proc_price <= $1 ORDER BY procedures.proc_price;`, [priceMaxNum];
+  // // Procedures on Targets and Symptoms
+  // static getAllProcOnTarAndSymp() {
+  //   let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures
+  //   INNER JOIN procedures_targets INNER JOIN targets INNER JOIN procedures_symptoms INNER JOIN symptoms
+  //   ON procedures.proc_id=procedures_targets.procedures_id AND procedures_targets.targets_id=targets.tar_id
+  //   AND procedures.proc_id=procedures_symptoms.procedures_id AND procedures_symptoms.symptoms_id=symptoms.symp_id
+  //   WHERE targets.tar_id IN (${tarIdsString}) AND symptoms.symp_id IN (${sympIdsString}) ORDER BY procedures.proc_price;`;
   //   return db.execute(sql);
   // }
 
-  static findAllProceduresOnPrices(priceMaxNum) {
-    let sql = `SELECT proc_title_et, proc_descr_et, proc_duration, proc_price FROM procedures WHERE proc_price <= ${priceMaxNum} ORDER BY procedures.proc_price;`;
-    return db.execute(sql);
-  }
+  // Procedures On All Filters dynamically, if exists
+  static async getAllProcOnTarAndSymp(tarIds, sympIds, disIds, priceMax) {
+    let join = [];
+    let where = [];
+    let namedPlaceholders = {};
 
-  // Procedures on Symptoms
-  static findAllProceduresOnSymptoms(sympIdsString) {
-    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
-    INNER JOIN procedures_symptoms INNER JOIN symptoms ON procedures.proc_id=procedures_symptoms.procedures_id
-    AND procedures_symptoms.symptoms_id=symptoms.symp_id WHERE symptoms.symp_id IN (${sympIdsString}) ORDER BY procedures.proc_price; `;
-    return db.execute(sql);
-  }
+    if (tarIds) {
+      join.push(
+        `procedures_targets USING (proc_id) JOIN targets USING (tar_id)`
+      );
+      where.push(`tar_id IN (:clientsTargets)`);
+      namedPlaceholders.clientsTargets = tarIds.toString();
+    }
 
-  // Procedures on Targets
-  static findAllProceduresOnTargets(tarIdsString) {
-    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
-    INNER JOIN procedures_targets INNER JOIN targets ON procedures.proc_id=procedures_targets.procedures_id
-    AND procedures_targets.targets_id=targets.tar_id WHERE targets.tar_id IN (${tarIdsString}) ORDER BY procedures.proc_price; `;
-    return db.execute(sql);
-  }
+    if (sympIds) {
+      join.push(
+        `procedures_symptoms USING (proc_id) JOIN symptoms USING (symp_id)`
+      );
+      where.push(`symp_id IN (:clientsSymptoms)`);
+      namedPlaceholders.clientsSymptoms = sympIds.toString();
+    }
 
-  // Procedures on Diseases
-  static findAllProceduresOnDiseases(disIdsStr) {
-    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
-    INNER JOIN procedures_diseases INNER JOIN diseases ON procedures.proc_id=procedures_diseases.procedures_id 
-    AND procedures_diseases.diseases_id=diseases.dis_id WHERE diseases.dis_id NOT IN (${disIdsStr}) ORDER BY procedures.proc_price; `;
-    return db.execute(sql);
-  }
+    if (disIds) {
+      join.push(
+        `procedures_diseases USING (proc_id) JOIN diseases USING (dis_id)`
+      );
+      where.push(`dis_id IN (:clientsDiseases)`);
+      namedPlaceholders.clientsDiseases = disIds.toString();
+    }
 
-  //
-  //
+    if (priceMax) {
+      where.push(`proc_price <= :clientsPrice`);
+      namedPlaceholders.clientsPrice = Number(priceMax);
+    }
+
+    function implodeData(type, data, separator = " ") {
+      data = data.join(" " + separator + " ");
+      if (data.length) {
+        data = type + " " + data;
+      }
+      return data;
+    }
+
+    join = implodeData("JOIN", join);
+    where = implodeData("WHERE", where, "AND");
+
+    //     const [rows] = await db.execute(
+    //       `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price
+    // FROM procedures ${join} ${where} AND procedures.proc_price <= ${priceMaxNum} ORDER BY proc_price`,
+    //         placeholders)
+    // console.log(rows);
+    //   }
+
+    //     const rows = await db.execute(
+    //       `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price
+    //  FROM procedures ${join} ${where} AND procedures.proc_price <= ${priceMaxNum} ORDER BY proc_price;`,
+    //       { clientsTargets: placeholders }
+    // console.log(rows);
+    //     );
+
+    const [rows] = await db.execute(
+      `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price 
+   FROM procedures ${join} ${where} ORDER BY proc_price;`,
+      namedPlaceholders
+    );
+    console.log(rows);
+  }
 
   /** ------------------------------------------------------------------
    * ADMINS-PANEL MySQL statements for Procedures Controller methods

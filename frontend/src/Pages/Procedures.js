@@ -74,6 +74,8 @@ export const Procedures = () => {
   const [targetsValue, setTargetsValue] = useState([]); // Responsible for catching chousen ID in dropdown
   const [symptoms, setSymptoms] = useState([]);
   const [symptomsValue, setSymptomsValue] = useState([]); // Responsible for catching chousen ID in dropdown
+  const [procedures, setProcedures] = useState([]);
+  const [pricesValue, setPricesValue] = useState([]);
 
   // One variable for all useStates for passing
   const obj = {
@@ -89,6 +91,10 @@ export const Procedures = () => {
     setSymptoms,
     symptomsValue,
     setSymptomsValue,
+    procedures,
+    setProcedures,
+    pricesValue,
+    setPricesValue,
   };
 
   return (
@@ -113,6 +119,7 @@ export const Procedures = () => {
           {/*But will be 6 units on small screens */}
           <div style={classes.container}>
             <Grid item xs={12} sm={6}>
+              <reference types="cypress" />
               <DropTargets {...obj} />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -131,7 +138,7 @@ export const Procedures = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Slider />
+              <Slider {...obj} />
             </Grid>
           </div>
         </Grid>
