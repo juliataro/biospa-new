@@ -99,7 +99,12 @@ export const Procedures = () => {
 
   return (
     <div style={classes.root}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid
+        container
+        rowSpacing={1}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        id="procedurePage"
+      >
         <Grid item xs={12} style={classes.intro}>
           {/* HEADER */}
           <div style={classes.sec}>
@@ -118,7 +123,7 @@ export const Procedures = () => {
           {/*This item will be 12 units on extra small screens */}
           {/*But will be 6 units on small screens */}
           <div style={classes.container}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} id="targetComp">
               <reference types="cypress" />
               <DropTargets {...obj} />
             </Grid>

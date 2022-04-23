@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "chance": "^1.1.8",
+    "cypress-react-unit-test": "3.0.0-cypress-mount-mode.14",
     "nodemon": "^2.0.15",
     "react-router-dom": "^6.2.1",
     "webpack-cli": "^4.9.2"

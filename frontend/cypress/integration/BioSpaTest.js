@@ -7,9 +7,10 @@ describe("renders the homepage", () => {
   });
 });
 
-describe("chooses the diseases, presses the button", () => {
+describe("finds procedures matching target ID nr.1", () => {
   it("chooses procedures matching target ", () => {
     cy.visit("/");
-    cy.find();
+    cy.get("#procedurePage");
+    cy.get("grid.#targetComp").parent;
   });
 });
