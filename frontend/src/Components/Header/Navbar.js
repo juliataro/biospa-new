@@ -80,7 +80,7 @@ function Navbar() {
                 </div>
 
                 <Stack direction="row" spacing={2}>
-                  <Button variant="outlined">Loogi Sisse</Button>
+                  {/* <Button variant="outlined">Loogi Sisse</Button>
 
                   <Button
                     className={classes.button}
@@ -88,7 +88,7 @@ function Navbar() {
                     href="#contained-buttons"
                   >
                     Registreeri
-                  </Button>
+                  </Button> */}
                 </Stack>
               </div>
             )}

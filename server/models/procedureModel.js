@@ -86,20 +86,6 @@ class Procedure {
     join = implodeData("JOIN", join, "JOIN");
     where = implodeData("WHERE", where, "AND");
 
-    //     const [rows] = await db.execute(
-    //       `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price
-    // FROM procedures ${join} ${where} AND procedures.proc_price <= ${priceMaxNum} ORDER BY proc_price`,
-    //         placeholders)
-    // console.log(rows);
-    //   }
-
-    //     const rows = await db.execute(
-    //       `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price
-    //  FROM procedures ${join} ${where} AND procedures.proc_price <= ${priceMaxNum} ORDER BY proc_price;`,
-    //       { clientsTargets: placeholders }
-    // console.log(rows);
-    //     );
-
     const [rows] = await db.execute(
       `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price 
    FROM procedures ${join} ${where} ORDER BY proc_price;`,

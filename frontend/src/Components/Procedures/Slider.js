@@ -26,13 +26,6 @@ function RangeSlider(props) {
   };
 
   // Every time you get out of focus from the input field, the event will trigger
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
-    }
-  };
 
   return (
     <Box sx={{ width: 250 }}>
@@ -50,7 +43,6 @@ function RangeSlider(props) {
         <Grid item>
           <Input
             value={value}
-            onBlur={handleBlur}
             size="small"
             onChange={handleInputChange}
             // onBlur={handleBlur}

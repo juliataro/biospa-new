@@ -29,19 +29,11 @@ function DropDiseases(props) {
     loadData();
   }, [setDiseases]);
 
+  // Handling Selected valjues
   function handleSelectChange(event, newValues) {
     setDiseasesValue(newValues.map((disease) => disease.dis_id));
     console.log(diseasesValue);
   }
-
-  // function handleSelectChange(event, id) {
-  //   let newArray = diseasesValue.selected;
-  //   newArray = newArray.push(diseasesValue.id);
-  //   console.log(id);
-  //   console.log(diseasesValue.selected);
-
-  //   setDiseasesValue({ selected: newArray });
-  // }
 
   //////////////////////////////////////////////////////////////////////////////
 
