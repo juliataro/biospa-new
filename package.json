@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "cypress-image-snapshot": "^4.0.1"
+  }
+}

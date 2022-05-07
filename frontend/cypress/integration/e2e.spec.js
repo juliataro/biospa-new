@@ -35,6 +35,8 @@ describe('Bio spa test', () => {
       cy.get('.MuiSlider-rail').click()
 
       cy.get('.MuiButton-root').click()
+      
+      cy.get('#enhanced-table-checkbox-0').should('have.text', 'Klassikaline massaaž')
 
     }) 
   })
